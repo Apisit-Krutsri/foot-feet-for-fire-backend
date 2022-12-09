@@ -5,21 +5,23 @@ const activitySchema = mongoose.Schema(
   {
     title: {
       type: String,
-      required: true, //ห้ามใส่ค่าว่าง
+      required: true, // ห้ามใส่ค่าว่าง
     },
     description: {
       type: {},
       required: true,
     },
+    date: {
+      type: String,
+      required: true,
+    },
     firstTime: {
       type: String,
-      lowercase: true,
-      required: true, //ห้ามใส่ค่าซ้ำกัน
+      required: true,
     },
     toTime: {
       type: String,
-      lowercase: true,
-      required: true, //ห้ามใส่ค่าซ้ำกัน
+      required: true,
     },
     sport: {
       type: String,

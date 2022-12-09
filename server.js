@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const app = require('./app');
-// // const activityRoute = require('./routes/activityRoutes');
 require('dotenv').config();
 
 // //connect cloud database = if connect -> console.log // if don't -> console.log err

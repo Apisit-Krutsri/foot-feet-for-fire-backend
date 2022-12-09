@@ -1,13 +1,12 @@
 // activityRoutes
 const express = require('express');
-
-const router = express.Router();
 const { create } = require('../controllers/activityController');
 
+const router = express.Router();
+
 //route
-router.post('/activity', create);
+router.post('/create', create); //create (post)
 
 module.exports = router;
 
-
-//app.js -> server.js -> routes -> controller (เรียกใช้จาก func create)
+//server.js -> app.js -> routes -> controller (เรียกใช้จาก func create)

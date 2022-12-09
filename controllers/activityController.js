@@ -1,22 +1,40 @@
 // activityController ใช้ติดต่อกับฐานข้อมูล
 // import { v4 as uuidv4 } from 'uuid';
-const Activities = require("../models/activityModel")
+const Activities = require('../models/activityModel');
 
 //บันทึกข้อมูล
-exports.create = (req, res) => {
-  const { uuid, firstTime, toTime, sport, title, description } = req.body;
-  res.json({
-    data: req.body,
-  });
+// exports.create = (req, res) => {
+//   try {
+//     const { uuid, firstTime, toTime, date, sport, title, description } =
+//       req.body;
+//     res.json({
+//       data: req.body,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
 
-  //บันทึกข้อมูล
-  Activities.create(
-    { uuid, firstTime, toTime, sport, title, description },
-    (err, activity) => {
-      if (err) {
-        res.status(400).json({ error: 'มีชื่อบทความซ้ำกัน' });
-      }
-      res.json(activity);
-    }
-  );
+//บันทึกข้อมูล
+
+//  Activities.create(
+//     { uuid, firstTime, toTime, date, sport, title, description },
+//     (err, activity) => {
+//       if (err) {
+//         res.status(400).json({ error: 'มีชื่อบทความซ้ำกัน' });
+//         return;
+//       }
+//       res.json(activity);
+//     }
+//   );
+// };
+
+exports.create = async (req, res) => {
+  try {
+    const newCard = await Activities.create(req.body);
+    res.status(201).json({
+      data: { card: newCard },
+    });
+  } catch (err) {
+    res.status(400).json({ message: console.log(err) });
+  }
 };
