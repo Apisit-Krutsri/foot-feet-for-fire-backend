@@ -1,11 +1,13 @@
 // activityRoutes
 const express = require('express');
-const { create } = require('../controllers/activityController');
+const { create, getAllCards, remove } = require('../controllers/activityController');
 
 const router = express.Router();
 
 //route
 router.post('/create', create); //create (post)
+router.get('/cards', getAllCards) // get cards to UI
+router.delete('/card/:uuid', remove)
 
 module.exports = router;
 
