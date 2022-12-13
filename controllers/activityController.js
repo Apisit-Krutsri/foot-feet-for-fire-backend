@@ -40,20 +40,35 @@ exports.create = async (req, res) => {
   }
 };
 
-//ดึงข้อมูลบทความทั้งหมดมา
+//ดึงข้อมูล activity ทั้งหมดมา
 exports.getAllCards = (req, res) => {
   Activities.find({}).exec((err, card) => {
     res.json(card);
   });
 };
 
-//ลบข้อมูลบทความ
+//ลบข้อมูล activity
 exports.remove = (req, res) => {
   const { uuid } = req.params;
   Activities.findOneAndRemove({ uuid }).exec((err, card) => {
     if (err) console.log(err);
     res.json({
-      message: 'ลบบทความเรียบร้อย',
+      message: 'Your activity was deleted',
     });
+  });
+};
+
+//อัพเดท activity
+exports.update = (req, res) => {
+  const { uuid } = req.params; //รับ slug url มา
+  // ส่งข้อมูล title, content, author มาเพื่อจะได้ทำการ อัพเดท
+  const { title, description, sport, date, firstTime, toTime } = req.body;
+  Activities.findOneAndUpdate(
+    { uuid },
+    { title, description, sport, date, firstTime, toTime },
+    { new: true }
+  ).exec((err, card) => {
+    if (err) console.log(err);
+    res.json(card);
   });
 };
