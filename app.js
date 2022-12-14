@@ -3,7 +3,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
 const activityRoute = require('./routes/activityRoutes');
-const profileRoute = require('./routes/profileRoutes')
+const profileRoute = require('./routes/profileRoutes');
+const signupRoute = require('./routes/signupRoutes');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(morgan('dev'));
 // 3) ROUTES
 app.use('/api', activityRoute);
 app.use('/api', profileRoute);
+// app.use('/api', signupRoute);
 
 module.exports = app;
 

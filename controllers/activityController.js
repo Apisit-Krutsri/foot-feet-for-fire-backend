@@ -1,32 +1,5 @@
 // activityController ใช้ติดต่อกับฐานข้อมูล
-// import { v4 as uuidv4 } from 'uuid';
 const Activities = require('../models/activityModel');
-
-//บันทึกข้อมูล
-// exports.create = (req, res) => {
-//   try {
-//     const { uuid, firstTime, toTime, date, sport, title, description } =
-//       req.body;
-//     res.json({
-//       data: req.body,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-
-//บันทึกข้อมูล
-
-//  Activities.create(
-//     { uuid, firstTime, toTime, date, sport, title, description },
-//     (err, activity) => {
-//       if (err) {
-//         res.status(400).json({ error: 'มีชื่อบทความซ้ำกัน' });
-//         return;
-//       }
-//       res.json(activity);
-//     }
-//   );
-// };
 
 // บันทึกข้อมูล
 exports.create = async (req, res) => {
@@ -43,6 +16,14 @@ exports.create = async (req, res) => {
 //ดึงข้อมูล activity ทั้งหมดมา
 exports.getAllCards = (req, res) => {
   Activities.find({}).exec((err, card) => {
+    res.json(card);
+  });
+};
+
+//ดึงข้อมูล activity ของ card ที่มี uuid ที่สนใจ
+exports.getCard = (req, res) => {
+  const {uuid} = req.params
+  Activities.find({uuid}).exec((err, card) => {
     res.json(card);
   });
 };

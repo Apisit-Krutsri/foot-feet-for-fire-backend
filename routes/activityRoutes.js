@@ -5,6 +5,7 @@ const {
   getAllCards,
   remove,
   update,
+  getCard,
 } = require('../controllers/activityController');
 
 const router = express.Router();
@@ -14,6 +15,7 @@ router.post('/create', create); //create (post)
 router.get('/cards', getAllCards); // get cards to UI
 router.delete('/card/:uuid', remove); //delete
 router.put('/card/:uuid', update); //update
+router.get('/card/:uuid', getCard); // get single card
 
 module.exports = router;
 
