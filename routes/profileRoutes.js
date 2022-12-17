@@ -1,4 +1,4 @@
-// activityRoutes
+// profileRoutes
 const express = require('express');
 const { profile, information } = require('../controllers/profileController');
 

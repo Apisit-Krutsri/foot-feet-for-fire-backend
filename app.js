@@ -4,7 +4,8 @@ const cors = require('cors');
 require('dotenv').config();
 const activityRoute = require('./routes/activityRoutes');
 const profileRoute = require('./routes/profileRoutes');
-const signupRoute = require('./routes/signupRoutes');
+const userRoute = require('./routes/userRoutes');
+const authRoute = require('./routes/authRoutes');
 
 const app = express();
 
@@ -16,7 +17,8 @@ app.use(morgan('dev'));
 // 3) ROUTES
 app.use('/api', activityRoute);
 app.use('/api', profileRoute);
-// app.use('/api', signupRoute);
+app.use('/api', userRoute);
+app.use('/api', authRoute);
 
 module.exports = app;
 
