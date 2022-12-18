@@ -1,12 +1,17 @@
 // profileRoutes
 const express = require('express');
-const { profile, information } = require('../controllers/profileController');
+const {
+  profile,
+  information,
+  editProfile,
+} = require('../controllers/profileController');
 
 const router = express.Router();
 
 //Profile Route
 router.post('/profile', profile); //create profile
-router.get('/information/:uuidprofile', information); //get profile information
+router.get('/information/:id', information); //get profile information
+router.put('/information/:id', editProfile); // edit profile
 
 module.exports = router;
 

@@ -57,6 +57,7 @@ const profileSchema = mongoose.Schema(
       lowercase: true,
       unique: true, //ห้ามใส่ค่าซ้ำกัน
     },
+    creator: { type: mongoose.Types.ObjectId, ref: 'Users' },
   },
   { timestamps: true }
 );

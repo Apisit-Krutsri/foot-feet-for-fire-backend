@@ -14,7 +14,45 @@ exports.profile = async (req, res) => {
 
 //ดึงข้อมูล profile มา
 exports.information = (req, res) => {
-  Profile.find({}).exec((err, data) => {
+  const { id } = req.params;
+  Profile.find({ creator: id }).exec((err, data) => {
+    res.json(data);
+  });
+};
+
+//อัพเดท profile
+exports.editProfile = (req, res) => {
+  const { id } = req.params;
+  // ส่งข้อมูลมาเพื่อจะได้ทำการ อัพเดท
+  const {
+    firstName,
+    lastName,
+    weight,
+    height,
+    gender,
+    birthday,
+    quote,
+    goal,
+    selectGoal,
+    number,
+  } = req.body;
+  Profile.findOneAndUpdate(
+    { id },
+    {
+      firstName,
+      lastName,
+      weight,
+      height,
+      gender,
+      birthday,
+      quote,
+      goal,
+      selectGoal,
+      number,
+    },
+    { new: true }
+  ).exec((err, data) => {
+    if (err) console.log(err);
     res.json(data);
   });
 };

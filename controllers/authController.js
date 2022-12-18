@@ -16,7 +16,9 @@ exports.auth = async (req, res) => {
       return res.status(401).send({ message: 'Invalid Email or Password' });
 
     const token = user.generateAuthToken();
+    // const tokenAndId = {token: token, id: user._id}
     res.status(200).send({ data: token, message: 'Logged in successfully' });
+    // res.write(user._id);
   } catch (error) {
     res.status(500).send({ message: 'Internal Server Error' });
   }

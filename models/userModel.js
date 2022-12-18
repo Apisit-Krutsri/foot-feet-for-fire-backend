@@ -13,11 +13,8 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true, // ห้ามใส่ค่าว่าง
     },
-    // uuid: {
-    //   type: String,
-    //   lowercase: true,
-    //   unique: true, //ห้ามใส่ค่าซ้ำกัน
-    // },
+    activities: [{ type: mongoose.Types.ObjectId, ref: 'Activities' }],
+    profile: [{ type: mongoose.Types.ObjectId, ref: 'Profile' }],
   },
   { timestamps: true }
 );
