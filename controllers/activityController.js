@@ -48,10 +48,10 @@ exports.remove = (req, res) => {
 exports.update = (req, res) => {
   const { uuid } = req.params;
   // ส่งข้อมูลมาเพื่อจะได้ทำการ อัพเดท
-  const { title, description, sport, date, firstTime, toTime } = req.body;
+  const { title, description, sport, date, firstTime, toTime, image } = req.body;
   Activities.findOneAndUpdate(
     { uuid },
-    { title, description, sport, date, firstTime, toTime },
+    { title, description, sport, date, firstTime, toTime, image },
     { new: true }
   ).exec((err, card) => {
     if (err) console.log(err);

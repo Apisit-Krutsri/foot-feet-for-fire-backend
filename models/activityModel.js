@@ -26,6 +26,9 @@ const activitySchema = mongoose.Schema(
     sport: {
       type: String,
     },
+    image: {
+      type: String,
+    },
     uuid: {
       type: String,
       lowercase: true,

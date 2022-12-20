@@ -20,18 +20,6 @@ exports.addImage = async (req, res) => {
   }
 };
 
-// exports.removeImage = async (req, res) => {
-//   try {
-//     let image_id = req.body.public_id;
-//     cloudinary.uploader.destroy(image_id, (result) => {
-//       res.send(result);
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).send('Remove Error!!!');
-//   }
-// };
-
 exports.getImage = async (req, res) => {
   const { id } = req.params;
   Profile.find({ creator: id }).exec((err, data) => {
