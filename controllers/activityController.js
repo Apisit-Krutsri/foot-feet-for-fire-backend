@@ -1,7 +1,7 @@
 // activityController ใช้ติดต่อกับฐานข้อมูล
-const { default: mongoose } = require('mongoose');
+// const { default: mongoose } = require('mongoose');
 const Activities = require('../models/activityModel');
-const Users = require('../models/userModel');
+// const Users = require('../models/userModel');
 
 // บันทึกข้อมูล
 exports.create = async (req, res) => {
@@ -20,7 +20,7 @@ exports.create = async (req, res) => {
 //ดึงข้อมูล activity ทั้งหมดของ User คนหนึ่งๆ มา
 exports.getAllCards = (req, res) => {
   const { id } = req.params;
-  Activities.find({ creator:id }).exec((err, card) => {
+  Activities.find({ creator: id }).exec((err, card) => {
     res.json(card);
   });
 };
