@@ -6,6 +6,7 @@ const activityRoute = require('./routes/activityRoutes');
 const profileRoute = require('./routes/profileRoutes');
 const userRoute = require('./routes/userRoutes');
 const authRoute = require('./routes/authRoutes');
+const imageRoute = require('./routes/cloudinaryRoute');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api', activityRoute);
 app.use('/api', profileRoute);
 app.use('/api', userRoute);
 app.use('/api', authRoute);
+app.use('/api', imageRoute);
 
 module.exports = app;
 

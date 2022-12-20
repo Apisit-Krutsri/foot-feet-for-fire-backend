@@ -11,7 +11,7 @@ const router = express.Router();
 //Profile Route
 router.post('/profile', profile); //create profile
 router.get('/information/:id', information); //get profile information
-router.put('/information/:id', editProfile); // edit profile
+router.put('/information/edit/:id', editProfile); // edit profile
 
 module.exports = router;
 

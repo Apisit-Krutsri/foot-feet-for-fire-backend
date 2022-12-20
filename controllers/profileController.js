@@ -35,9 +35,10 @@ exports.editProfile = (req, res) => {
     goal,
     selectGoal,
     number,
+    image,
   } = req.body;
   Profile.findOneAndUpdate(
-    { id },
+    { creator: id },
     {
       firstName,
       lastName,
@@ -49,6 +50,7 @@ exports.editProfile = (req, res) => {
       goal,
       selectGoal,
       number,
+      image,
     },
     { new: true }
   ).exec((err, data) => {

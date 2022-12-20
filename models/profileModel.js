@@ -1,17 +1,6 @@
 // profileModel
 const mongoose = require('mongoose');
 
-// fname: fname,
-// lname: lname,
-// weight: weight,
-// height: height,
-// gender: gender,
-// birth: birth,
-// quote: quote,
-// goal: goal,
-// selectGoal: selectGoal,
-// num: num,
-
 const profileSchema = mongoose.Schema(
   {
     firstName: {
@@ -51,6 +40,9 @@ const profileSchema = mongoose.Schema(
     number: {
       type: Number,
       //   required: true,
+    },
+    image: {
+      type: String,
     },
     uuidprofile: {
       type: String,
