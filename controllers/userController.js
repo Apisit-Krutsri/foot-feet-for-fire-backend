@@ -45,29 +45,22 @@ exports.getUser = (req, res, next) => {
 };
 
 //อัพเดท User
-exports.editUser = async (req, res) => {
-  const { id } = req.params;
-  // ส่งข้อมูลมาเพื่อจะได้ทำการ อัพเดท
-  // const { password } = req.body;
-  const salt = await bcrypt.genSalt(Number(process.env.SALT));
-  const hashPassword = await bcrypt.hash(req.body.password, salt);
-  await Users.findOneAndUpdate(
-    { _id: id },
-    { password: hashPassword },
-    { new: true }
-  ).exec((err, data) => {
-    // // If query was not found document, it returns null
-    // // Error catcher
-    // if (err || data == null) {
-    //   //Error generator
-    //   const error = errorCatcher(
-    //     err,
-    //     '❌ Error on update User information',
-    //     404
-    //   );
-    //   return next(error);
-    // }
-    // res.json(data);
-    res.json({ err: err, data: data });
-  });
+exports.editUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    // ส่งข้อมูลมาเพื่อจะได้ทำการ อัพเดท
+    // const { password } = req.body;
+    const salt = await bcrypt.genSalt(Number(process.env.SALT));
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
+    await Users.findOneAndUpdate(
+      { _id: id },
+      { password: hashPassword },
+      { new: true }
+    );
+  } catch (err) {
+    //Error generator
+    const error = errorCatcher(err, '❌ Error on updating Profile', 400);
+    //error.message and error.cause
+    return next(error);
+  }
 };
