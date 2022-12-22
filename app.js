@@ -16,6 +16,10 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 
+app.get('/', (req,res,next) => {
+res.send('I love kungkeng')
+})
+
 // 2) ROUTES
 app.use('/api', activityRoute);
 app.use('/api', profileRoute);
