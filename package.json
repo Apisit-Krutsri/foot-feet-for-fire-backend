@@ -4,7 +4,7 @@
   "description": "website tracking exercises back end",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "G4",
   "license": "ISC",
