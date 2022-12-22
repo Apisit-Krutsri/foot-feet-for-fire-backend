@@ -6,6 +6,7 @@ const activityRoute = require('./routes/activityRoutes');
 const profileRoute = require('./routes/profileRoutes');
 const userRoute = require('./routes/userRoutes');
 const authRoute = require('./routes/authRoutes');
+const { errorHandler } = require('./controllers/errorController');
 
 const app = express();
 
@@ -14,11 +15,14 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 
-// 3) ROUTES
+// 2) ROUTES
 app.use('/api', activityRoute);
 app.use('/api', profileRoute);
 app.use('/api', userRoute);
 app.use('/api', authRoute);
+
+// 3) Global error handler
+app.use(errorHandler);
 
 module.exports = app;
 

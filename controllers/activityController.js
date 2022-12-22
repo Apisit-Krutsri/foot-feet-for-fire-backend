@@ -1,10 +1,12 @@
+/* eslint-disable no-console */
 // activityController ใช้ติดต่อกับฐานข้อมูล
 // const { default: mongoose } = require('mongoose');
 const Activities = require('../models/activityModel');
+const { errorCatcher } = require('./errorController');
 // const Users = require('../models/userModel');
 
 // บันทึกข้อมูล
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const newCard = await Activities.create(req.body);
     // let user = await Users.findById(req.body.creator);
@@ -13,39 +15,60 @@ exports.create = async (req, res) => {
     });
     // console.log(req.body.creator)
   } catch (err) {
-    res.status(400).json({ message: console.log(err) });
+    //Error generator
+    const error = errorCatcher(err, '❌ Error on creating activity', 400);
+    //error.message and error.cause
+    return next(error);
   }
 };
 
 //ดึงข้อมูล activity ทั้งหมดของ User คนหนึ่งๆ มา
-exports.getAllCards = (req, res) => {
+exports.getAllCards = (req, res, next) => {
   const { id } = req.params;
+  console.log(id);
   Activities.find({ creator: id }).exec((err, card) => {
+    //Error catcher
+    if (err || card.length === 0) {
+      //Error generator
+      const error = errorCatcher(err, '❌ Error on get all Activity', 404);
+      //error.message and error.cause
+      return next(error);
+    }
     res.json(card);
   });
 };
 
 //ดึงข้อมูล activity ของ card ที่มี uuid ที่สนใจ
-exports.getCard = (req, res) => {
+exports.getCard = (req, res, next) => {
   const { uuid } = req.params;
   Activities.find({ uuid }).exec((err, card) => {
+    //Error catcher
+    if (err || card.length === 0) {
+      //Error generator
+      const error = errorCatcher(err, '❌ Error on get an Activity', 404);
+      return next(error);
+    }
     res.json(card);
   });
 };
 
 //ลบข้อมูล activity
-exports.remove = (req, res) => {
+exports.remove = (req, res, next) => {
   const { uuid } = req.params;
   Activities.findOneAndRemove({ uuid }).exec((err, card) => {
-    if (err) console.log(err);
-    res.json({
-      message: 'Your activity was deleted',
-    });
+    //If query was not found document, it returns null
+    //Error catcher
+    if (err || card == null) {
+      //Error generator
+      const error = errorCatcher(err, '❌ Error on remove an Activity', 404);
+      return next(error);
+    }
+    res.json(`Your ${card.uuid} card has already removed`);
   });
 };
 
 //อัพเดท activity
-exports.update = (req, res) => {
+exports.update = (req, res, next) => {
   const { uuid } = req.params;
   // ส่งข้อมูลมาเพื่อจะได้ทำการ อัพเดท
   const { title, description, sport, date, firstTime, toTime } = req.body;
@@ -54,7 +77,13 @@ exports.update = (req, res) => {
     { title, description, sport, date, firstTime, toTime },
     { new: true }
   ).exec((err, card) => {
-    if (err) console.log(err);
+    //If query was not found document, it returns null
+    //Error catcher
+    if (err || card == null) {
+      //Error generator
+      const error = errorCatcher(err, '❌ Error on update an Activity', 404);
+      return next(error);
+    }
     res.json(card);
   });
 };

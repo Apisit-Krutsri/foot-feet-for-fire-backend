@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 const app = require('./app');
 require('dotenv').config();
@@ -8,11 +9,12 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: false,
   })
-  .then(() => console.log('connected to database'))
-  .catch((err) => console.log(err));
+  .then(
+    () => console.log('✅ Connected to database'),
+    (err) => console.error(err)
+  );
 
 // // route
-
 // app.get('*', (req, res) => {
 //   res.json({
 //     data: 'message from server',
@@ -20,8 +22,14 @@ mongoose
 // });
 
 const port = process.env.PORT;
-app.listen(port, () => {
-  console.log(`✅ App running on port ${port}...`);
-});
+(async () => {
+  try {
+    app.listen(port, () => {
+      console.log(`✅ App running on port ${port}...`);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+})();
 
 // API (front-end) -> backend url -> database (mongoDB)
